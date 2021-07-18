@@ -58,6 +58,7 @@ img {
     margin-right: 0.2rem;
     padding: 5px;
     font-size: 12px;
+    min-width: 180px;
 }
 .center-content button {
     padding: 5px 10px;
