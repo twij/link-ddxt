@@ -36,7 +36,6 @@ img {
 h1 {
     font-size: 14px;
     font-weight: bold;
-    margin-top: 2rem;
 }
 p {
     margin-top: 0.2rem;
@@ -60,6 +59,9 @@ p {
 .center-content img {
     margin-bottom: 0.5rem;
 }
+.center-content .url-form {
+    display: flex;
+}
 .center-content input {
     background: white;
     border: 1px solid grey;
@@ -68,7 +70,7 @@ p {
     margin-right: 0.2rem;
     padding: 5px;
     font-size: 12px;
-    /* min-width: 180px; */
+    flex: 2;
 }
 .center-content button {
     padding: 5px 10px;
@@ -101,8 +103,10 @@ p {
 .center-content .more-info {
     font-size: 12px;
     text-align: left;
+    margin-top: 0.2rem;
 }
 .center-content .info-text {
     font-size: 12px;
     text-align: left;
+    margin-top: 1rem;
 }
