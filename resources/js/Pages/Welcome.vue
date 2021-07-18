@@ -2,10 +2,11 @@
     <div class="" @paste="onPaste" @copy="copyRedirect" @keyup.enter="handleEnter">
         <div class="center-content">
           <img src="/img/ddxtcc.png" alt="ddxtcc" class="object-center">
-          <input type="text" v-model="url" id="url-box" placeholder="Enter URL to shorten">
-          <button type="button" class="btn-blue" v-on:click="createRedirect" v-show="!complete">Shorten</button>
-          <button type="button" class="btn-green" v-on:click="copyRedirect" v-show="complete">{{copyText}}</button>
-          <span class="copy-success" v-if="copySuccess">Copied</span>
+          <div class="url-form">
+            <input type="text" v-model="url" id="url-box" placeholder="Enter URL to shorten">
+            <button type="button" class="btn-blue" v-on:click="createRedirect" v-show="!complete">Shorten</button>
+            <button type="button" class="btn-green" v-on:click="copyRedirect" v-show="complete">{{copyText}}</button>
+          </div>
           <div class="error-text" v-if="error">{{ error }}</div>
           <div class="more-info"><a href="#" @click.prevent="showInfo = !showInfo">info</a> - <a href="https://github.com/twij/link-ddxt/" target="_blank">github</a></div>
           <div class="info-text" v-show="showInfo">
