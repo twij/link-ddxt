@@ -79,9 +79,10 @@ p {
 .center-content input {
     background: white;
     border: 1px solid grey;
-    border-radius: 5px;
+    border-right: 0;
+    /* border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px; */
     font-size: 1.2rem;
-    margin-right: 0.2rem;
     padding: 5px;
     font-size: 12px;
     flex: 1;
@@ -89,7 +90,8 @@ p {
 
 .center-content button {
     padding: 5px 10px;
-    border-radius: 5px;
+    /* border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px; */
     font-size: 1.2rem;
     cursor: pointer;
     border: 1px solid white;

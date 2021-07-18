@@ -45,6 +45,7 @@ class URLNotFoundException extends Exception
      */
     public function render(): \Illuminate\Http\JsonResponse
     {
+        abort(404);
         return response()->json(['error' => $this->getMessage()], $this->status);
     }
 }
