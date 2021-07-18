@@ -20,7 +20,7 @@
           <img src="/img/ddxtcc.png" alt="ddxtcc" class="object-center">
           <input type="text" v-model="url" id="url-box" @keyup.enter="createRedirect">
           <button type="button" class="btn-blue" v-on:click="createRedirect" v-show="!complete">Shorten</button>
-          <button type="button" class="btn-green" v-on:click="copyRedirect" v-show="complete">Copy</button>
+          <button type="button" class="btn-green" v-on:click="copyRedirect" v-show="complete">{{copyText}}</button>
           <span class="copy-success" v-if="copySuccess">Copied</span>
           <div class="error-text" v-if="error">{{ error }}</div>
         </div>
@@ -45,7 +45,7 @@
         url: null,
         complete: false,
         error: null,
-        copySuccess: false
+        copyText: 'Copy'
       }
     },
     methods: {
@@ -65,7 +65,7 @@
 
         try {
           document.execCommand('copy')
-          this.copySuccess = true
+          this.copyText = 'Copied'
         } catch (err) {
           this.error= "Unable to copy :("
         }
@@ -75,7 +75,7 @@
         this.createRedirect()
       },
       handleEnter() {
-        if (this.complete) {
+        if (this.complete === true) {
           this.copyRedirect()
         } else {
           this.createRedirect()

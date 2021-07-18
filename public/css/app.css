@@ -55,6 +55,7 @@ img {
     font-size: 1.2rem;
     margin-right: 0.2rem;
     padding: 5px;
+    font-size: 12px;
 }
 .center-content button {
     padding: 5px 10px;
@@ -62,6 +63,7 @@ img {
     font-size: 1.2rem;
     cursor: pointer;
     border: 1px solid white;
+    font-size: 12px;
 }
 .center-content .btn-blue {
     background-color: #456EF9;

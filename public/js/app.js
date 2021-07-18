@@ -19839,7 +19839,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       url: null,
       complete: false,
       error: null,
-      copySuccess: false
+      copyText: 'Copy'
     };
   },
   methods: {
@@ -19893,7 +19893,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 try {
                   document.execCommand('copy');
-                  _this2.copySuccess = true;
+                  _this2.copyText = 'Copied';
                 } catch (err) {
                   _this2.error = "Unable to copy :(";
                 }
@@ -19911,7 +19911,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.createRedirect();
     },
     handleEnter: function handleEnter() {
-      if (this.complete) {
+      if (this.complete === true) {
         this.copyRedirect();
       } else {
         this.createRedirect();
@@ -24404,9 +24404,9 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
     onClick: _cache[4] || (_cache[4] = function () {
       return $options.copyRedirect && $options.copyRedirect.apply($options, arguments);
     })
-  }, "Copy", 512
-  /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.complete]]), $data.copySuccess ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("span", _hoisted_3, "Copied")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $data.error ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.error), 1
+  }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.copyText), 513
+  /* TEXT, NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.complete]]), _ctx.copySuccess ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("span", _hoisted_3, "Copied")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $data.error ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.error), 1
   /* TEXT */
   )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])], 32
   /* HYDRATE_EVENTS */
