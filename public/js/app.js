@@ -19837,10 +19837,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   data: function data() {
     return {
       url: null,
+      previous: null,
       complete: false,
       error: null,
-      copyText: 'Copy'
+      copyText: 'Copy',
+      copySuccess: false
     };
+  },
+  watch: {
+    url: function url(val) {
+      if (val != this.previous) {
+        this.complete = false;
+      }
+    }
   },
   methods: {
     createRedirect: function createRedirect() {
@@ -19852,31 +19861,37 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _context.prev = 0;
-                _context.next = 3;
+                if (!(_this.url !== _this.previous)) {
+                  _context.next = 14;
+                  break;
+                }
+
+                _context.prev = 1;
+                _context.next = 4;
                 return axios__WEBPACK_IMPORTED_MODULE_1___default().post('/api', {
                   url: _this.url
                 });
 
-              case 3:
+              case 4:
                 res = _context.sent;
                 _this.url = res.data.url;
+                _this.previous = _this.url;
                 _this.complete = true;
                 _this.copyText = 'Copy';
-                _context.next = 12;
+                _context.next = 14;
                 break;
 
-              case 9:
-                _context.prev = 9;
-                _context.t0 = _context["catch"](0);
+              case 11:
+                _context.prev = 11;
+                _context.t0 = _context["catch"](1);
                 _this.error = 'Unable to shorten URL';
 
-              case 12:
+              case 14:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[0, 9]]);
+        }, _callee, null, [[1, 11]]);
       }))();
     },
     copyRedirect: function copyRedirect() {
@@ -19912,7 +19927,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.createRedirect();
     },
     handleEnter: function handleEnter() {
-      if (this.complete === true) {
+      if (this.complete) {
         this.copyRedirect();
       } else {
         this.createRedirect();
@@ -24377,24 +24392,27 @@ var _hoisted_4 = {
 var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
     "class": "",
-    onPaste: _cache[5] || (_cache[5] = function () {
+    onPaste: _cache[4] || (_cache[4] = function () {
       return $options.onPaste && $options.onPaste.apply($options, arguments);
-    })
-  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div v-if=\"canLogin\" class=\"admin-links\">\n            <inertia-link v-if=\"$page.props.user\" href=\"/dashboard\" class=\"admin-link\">\n                Dashboard\n            </inertia-link>\n\n            <template v-else>\n                <inertia-link :href=\"route('login')\" class=\"admin-link\">\n                    Log in\n                </inertia-link>\n\n                <inertia-link v-if=\"canRegister\" :href=\"route('register')\" class=\"admin-link\">\n                    Register\n                </inertia-link>\n            </template>\n        </div> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
+    }),
+    onCopy: _cache[5] || (_cache[5] = function () {
+      return $options.copyRedirect && $options.copyRedirect.apply($options, arguments);
+    }),
+    onKeyup: _cache[6] || (_cache[6] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)(function () {
+      return $options.handleEnter && $options.handleEnter.apply($options, arguments);
+    }, ["enter"]))
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
     type: "text",
     "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
       return $data.url = $event;
     }),
-    id: "url-box",
-    onKeyup: _cache[2] || (_cache[2] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)(function () {
-      return $options.createRedirect && $options.createRedirect.apply($options, arguments);
-    }, ["enter"]))
-  }, null, 544
-  /* HYDRATE_EVENTS, NEED_PATCH */
+    id: "url-box"
+  }, null, 512
+  /* NEED_PATCH */
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.url]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
     type: "button",
     "class": "btn-blue",
-    onClick: _cache[3] || (_cache[3] = function () {
+    onClick: _cache[2] || (_cache[2] = function () {
       return $options.createRedirect && $options.createRedirect.apply($options, arguments);
     })
   }, "Shorten", 512
@@ -24402,12 +24420,12 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, !$data.complete]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
     type: "button",
     "class": "btn-green",
-    onClick: _cache[4] || (_cache[4] = function () {
+    onClick: _cache[3] || (_cache[3] = function () {
       return $options.copyRedirect && $options.copyRedirect.apply($options, arguments);
     })
   }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.copyText), 513
   /* TEXT, NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.complete]]), _ctx.copySuccess ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("span", _hoisted_3, "Copied")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $data.error ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.error), 1
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.complete]]), $data.copySuccess ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("span", _hoisted_3, "Copied")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $data.error ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.error), 1
   /* TEXT */
   )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])], 32
   /* HYDRATE_EVENTS */
