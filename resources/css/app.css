@@ -72,7 +72,9 @@ p {
 }
 
 .center-content .url-form {
-    display: flex;
+    display: inline-flex;
+    flex-direction: row;
+    width: 100%;
 }
 
 .center-content input {
@@ -83,7 +85,7 @@ p {
     margin-right: 0.2rem;
     padding: 5px;
     font-size: 12px;
-    flex: 2;
+    flex: 1;
 }
 
 .center-content button {

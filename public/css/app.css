@@ -60,7 +60,9 @@ p {
     margin-bottom: 0.5rem;
 }
 .center-content .url-form {
-    display: flex;
+    display: inline-flex;
+    flex-direction: row;
+    width: 100%;
 }
 .center-content input {
     background: white;
@@ -70,7 +72,7 @@ p {
     margin-right: 0.2rem;
     padding: 5px;
     font-size: 12px;
-    flex: 2;
+    flex: 1;
 }
 .center-content button {
     padding: 5px 10px;
