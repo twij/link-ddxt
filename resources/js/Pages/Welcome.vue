@@ -54,6 +54,7 @@
           const res = await axios.post('/api', {url: this.url})
           this.url = res.data.url
           this.complete = true
+          this.copyText = 'Copy'
         } catch (error) {
           this.error = 'Unable to shorten URL'
         }

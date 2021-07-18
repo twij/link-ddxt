@@ -19862,20 +19862,21 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 res = _context.sent;
                 _this.url = res.data.url;
                 _this.complete = true;
-                _context.next = 11;
+                _this.copyText = 'Copy';
+                _context.next = 12;
                 break;
 
-              case 8:
-                _context.prev = 8;
+              case 9:
+                _context.prev = 9;
                 _context.t0 = _context["catch"](0);
                 _this.error = 'Unable to shorten URL';
 
-              case 11:
+              case 12:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[0, 8]]);
+        }, _callee, null, [[0, 9]]);
       }))();
     },
     copyRedirect: function copyRedirect() {

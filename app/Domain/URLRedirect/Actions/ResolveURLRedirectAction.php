@@ -34,7 +34,7 @@ class ResolveURLRedirectAction
     {
         $redirect = $this->redirect_repository->findByToken($token);
 
-        HitURLRedirectJob::dispatch($redirect);
+        HitURLRedirectJob::dispatch($token);
 
         return $redirect->url;
     }

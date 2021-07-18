@@ -20,11 +20,13 @@ class Criteria implements CriteriaInterface
     }
 
     /**
-     * Check if criteria is supported
+     * Check if current model is supported by criteria
      *
-     * @return boolean
+     * @param Model $model Model
+     *
+     * @return bool Status
      */
-    public function supported($model): bool
+    public function supported(Model $model): bool
     {
         if (! isset($this->supported)) {
             return true;
