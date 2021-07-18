@@ -38,7 +38,18 @@ img {
     display: block;
     margin: auto;
 }
-  
+
+h1 {
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: 2rem;
+}
+
+p {
+    margin-top: 0.2rem;
+    font-size: 12px;
+    display: block;
+}
 
 .admin-links {
     width: 100%;
@@ -52,7 +63,7 @@ img {
 }
 
 .center-content {
-    width: 400px;
+    width: 250px;
     margin: 20% auto auto auto;
     text-align: center;
 }
@@ -69,7 +80,7 @@ img {
     margin-right: 0.2rem;
     padding: 5px;
     font-size: 12px;
-    min-width: 180px;
+    /* min-width: 180px; */
 }
 
 .center-content button {
@@ -104,4 +115,14 @@ img {
 .center-content .error-text {
     margin-top: 1rem;
     color: red;
+}
+
+.center-content .more-info {
+    font-size: 12px;
+    text-align: left;
+}
+
+.center-content .info-text {
+    font-size: 12px;
+    text-align: left;
 }
