@@ -3,6 +3,7 @@
 namespace App\Domain\URLRedirect\Jobs;
 
 use App\Domain\URLRedirect\Contracts\URLRedirectRepositoryInterface;
+use App\Domain\URLRedirect\Criteria\ExpiredURLRedirectsCriteria;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Database\Eloquent\InvalidCastException;
@@ -11,24 +12,9 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use InvalidArgumentException;
 
-class HitURLRedirectJob implements ShouldQueue
+class PurgeExpiredURLRedirectsJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
-
-    /**
-     * @var string URL redirect token
-     */
-    protected string $redirect_token;
-
-    /**
-     * Increments the hit counter for a redirect
-     *
-     * @param string $redirect_token URL redirect token
-     */
-    public function __construct(string $redirect_token)
-    {
-        $this->redirect_token = $redirect_token;
-    }
 
     /**
      * Handle the job
@@ -43,12 +29,13 @@ class HitURLRedirectJob implements ShouldQueue
     public function handle(
         URLRedirectRepositoryInterface $redirect_repository
     ) {
-        try {
-            $url_redirect = $redirect_repository->findByToken($this->redirect_token);
-            $url_redirect->hits++;
-            $url_redirect->save();
-        } catch (\Exception $exception) {
-            print 'Hit counter not updated: ' . $exception->getMessage();
+        $expired = $redirect_repository->pushCriteria(new ExpiredURLRedirectsCriteria)->all();
+        foreach($expired as $entry) {
+            try {
+                $redirect_repository->delete($entry->id);
+            } catch (\Exception $exception) {
+                print 'Unable to delete URL redirect: ' . $exception->getMessage();
+            }
         }
     }
 }

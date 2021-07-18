@@ -2,6 +2,7 @@
 
 namespace App\Support\Repository\Contracts;
 
+use App\Support\Criteria\Criteria;
 use App\Support\Repository\Repository;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -89,4 +90,50 @@ interface RepositoryInterface
      * @return Repository Self
      */
     public function with(array $relations = []): \App\Support\Repository\Repository;
+
+        /**
+     * Reset the criteria scope
+     *
+     * @return Warrantywise\Support\Repository\Repository $this Self
+     */
+    public function resetScope(): \App\Support\Repository\Repository;
+
+    /**
+     * Skip the criteria
+     *
+     * @param bool $status Skip status
+     *
+     * @return \Warrantywise\Support\Repository\Repository $this Self
+     */
+    public function skipCriteria(bool $status = true): \App\Support\Repository\Repository;
+
+    /**
+     * Return the applied criteria
+     *
+     * @return \Illuminate\Support\Collection Criteria collection
+     */
+    public function getCriteria(): \Illuminate\Support\Collection;
+
+    /**
+     * Get entries by criteria
+     *
+     * @param Criteria $criteria Criteria to apply
+     */
+    public function getByCriteria(Criteria $criteria);
+
+    /**
+     * Apply a criteria to the collection
+     *
+     * @param Criteria $criteria Criteria to apply
+     *
+     * @return \Warrantywise\Support\Repository\Repository $this Self
+     */
+    public function pushCriteria(Criteria $criteria): \App\Support\Repository\Repository;
+
+    /**
+     * Apply the criteria to the repository
+     *
+     * @return mixed $this Models
+     */
+    public function applyCriteria();
 }

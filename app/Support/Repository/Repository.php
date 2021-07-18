@@ -21,9 +21,8 @@ abstract class Repository implements RepositoryInterface
 
     /**
      * Model
-     *
      */
-    protected Model $model;
+    protected $model;
 
     /**
      * Relationships to eager load
