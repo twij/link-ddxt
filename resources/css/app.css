@@ -117,8 +117,9 @@ p {
 }
 
 .center-content .error-text {
-    margin-top: 1rem;
+    margin-top: 0.2rem;
     color: red;
+    font-size: 12px;
 }
 
 .center-content .more-info {
