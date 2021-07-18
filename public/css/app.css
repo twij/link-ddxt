@@ -60,8 +60,7 @@ p {
     margin-bottom: 0.5rem;
 }
 .center-content .url-form {
-    display: inline-flex;
-    flex-direction: row;
+    display: flex;
     width: 100%;
 }
 .center-content input {
