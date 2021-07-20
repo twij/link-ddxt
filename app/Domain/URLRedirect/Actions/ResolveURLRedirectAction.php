@@ -32,10 +32,10 @@ class ResolveURLRedirectAction
      */
     public function execute(string $token): string
     {
-        $redirect = $this->redirect_repository->findByToken($token);
+        $redirect = $this->redirect_repository->findURLByTokenCached($token);
 
         HitURLRedirectJob::dispatch($token);
 
-        return $redirect->url;
+        return $redirect;
     }
 }

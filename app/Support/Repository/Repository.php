@@ -99,7 +99,7 @@ abstract class Repository implements RepositoryInterface
      * @param int     $id         Id
      * @param string  $attribute  Attribute
      *
-     * @return mixed Updated model
+     * @return Model Updated model
      */
     public function update(array $data, int $id): Model
     {

@@ -26,4 +26,15 @@ interface URLRedirectRepositoryInterface extends RepositoryInterface
      * @throws URLNotFoundException 
      */
     public function findByToken(string $token): URLRedirect;
+
+    /**
+     * Find a URL by its token (cached)
+     *
+     * @param string $token Token value
+     *
+     * @return string Redirect URL
+     *
+     * @throws URLNotFoundException 
+     */
+    public function findURLByTokenCached(string $token): string;
 }
