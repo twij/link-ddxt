@@ -2,6 +2,8 @@
 
 namespace App\Console;
 
+use App\Domain\BackupArchive\Jobs\DailyBackupArchiveJob;
+use App\Domain\URLRedirect\Jobs\PurgeExpiredURLRedirectsJob;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -24,7 +26,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        $schedule->job(new PurgeExpiredURLRedirectsJob)->dailyAt('00:00');
+        $schedule->job(new DailyBackupArchiveJob)->dailyAt('00:05');
     }
 
     /**
