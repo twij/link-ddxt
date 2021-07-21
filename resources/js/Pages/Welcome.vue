@@ -8,7 +8,7 @@
             <button type="button" class="btn-green" v-on:click="copyRedirect" v-show="complete">{{copyText}}</button>
           </div>
           <div class="error-text" v-if="error">{{ error }}</div>
-          <div class="more-info"><a href="#" @click.prevent="showInfo = !showInfo">info</a> - <a href="https://github.com/twij/link-ddxt/" target="_blank">github</a></div>
+          <div class="more-info"><a href="#" @click.prevent="showInfo = !showInfo">info</a> - <a href="https://github.com/twij/link-ddxt/" target="_blank">github</a> - <a href="/backup">backup</a></div>
           <div class="info-text" v-show="showInfo">
             <h1>A fast url shortener without drama</h1>
             <p>Fast and simple with no tracking or privacy violations.</p>

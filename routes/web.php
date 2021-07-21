@@ -28,4 +28,6 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->name('dashboard');
 
+Route::get('/backup', 'App\Domain\BackupArchive\BackupArchiveController@getLatest');
+
 Route::get('{token}', 'App\Http\Controllers\URLRedirectController@get');
