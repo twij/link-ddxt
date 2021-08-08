@@ -2,7 +2,9 @@
 
 namespace App\Domain\URLRedirect;
 
+use App\Domain\URLRedirect\Actions\CheckURLRedirectDeletedAction;
 use App\Domain\URLRedirect\Contracts\URLRedirectRepositoryInterface;
+use App\Domain\URLRedirect\Exceptions\URLDeletedException;
 use App\Domain\URLRedirect\Exceptions\URLNotFoundException;
 use App\Support\Repository\Repository;
 use Exception;
@@ -14,11 +16,33 @@ use Illuminate\Support\Str;
 
 class URLRedirectRepository extends Repository implements URLRedirectRepositoryInterface
 {
+    /**
+     * Cache repository
+     *
+     * @var CacheRepository
+     */
     protected CacheRepository $cache;
 
+    /**
+     * Cache prefix key
+     *
+     * @var string
+     */
     protected string $cache_key;
 
+    /**
+     * Logger
+     *
+     * @var Logger
+     */
     protected Logger $logger;
+
+    /**
+     * App container
+     *
+     * @var Container
+     */
+    protected Container $container;
 
     /**
      * Constructor
@@ -32,6 +56,7 @@ class URLRedirectRepository extends Repository implements URLRedirectRepositoryI
         Logger $logger
     ) {
         parent::__construct($container, $collection);
+        $this->container = $container;
         $this->cache = $cache;
         $this->cache_key = $this->model() . '-';
         $this->logger = $logger;
@@ -100,17 +125,22 @@ class URLRedirectRepository extends Repository implements URLRedirectRepositoryI
      */
     public function findURLByTokenCached(string $token): string
     {
-        try {
-            return $this->cache->rememberForever(
-                $this->cache_key . $token,
-                function () use ($token) {
-                    return $this->model->where('token', $token)->first()->url;
+        return $this->cache->rememberForever(
+            $this->cache_key . $token,
+            function () use ($token) {
+                if (! $redirect = $this->model->where('token', $token)->first()) {
+                    throw new URLNotFoundException();
                 }
-            );
-        } catch (\Exception $exception) {
-            $this->logger->log('warning', $exception);
-            throw new URLNotFoundException();
-        }
+
+                if ($this->container->make(
+                    CheckURLRedirectDeletedAction::class
+                )->execute($redirect)) {
+                    throw new URLDeletedException();
+                }
+
+                return $redirect->url;
+            }
+        );
     }
 
     /**
